@@ -47,7 +47,7 @@ SweepIt! is perfect for:
 
 ---
 
-### Ready to Clean Your Data? Let’s Get Started! 🧹✨  
+### Ready to Clean Your Data? Let’s Get Started!🧹✨  
 """)
 
 # File Upload Section
