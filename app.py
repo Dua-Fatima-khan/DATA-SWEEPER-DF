@@ -3,6 +3,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# Check for openpyxl dependency
+try:
+    import openpyxl
+except ImportError:
+    st.error("⚠️ **Missing Dependency**: The 'openpyxl' library is required to read Excel files. Please install it using `pip install openpyxl`.")
+    st.stop()  # Stop the app if the dependency is missing
+
 # Set App Config
 st.set_page_config(page_title="SweepIt! 💡", layout="wide", page_icon="🧹")
 
@@ -52,7 +59,6 @@ SweepIt! is perfect for:
 
 # File Upload Section
 uploaded_files = st.file_uploader("📤 **Upload Your Dataset** (CSV or Excel)", type=["csv", "xlsx"], accept_multiple_files=True)
-
 
 if uploaded_files:
     for uploaded_file in uploaded_files:
@@ -126,7 +132,10 @@ if uploaded_files:
                     st.warning("⚠️ Not enough columns for a scatter plot.")
             elif vis_type == "Histogram":
                 column = st.selectbox("Select Column for Histogram", df.columns)
-                st.bar_chart(df[column].value_counts())
+                if pd.api.types.is_numeric_dtype(df[column]):
+                    st.bar_chart(df[column].value_counts())
+                else:
+                    st.warning("⚠️ Selected column must be numeric for a histogram.")
 
             # Download Cleaned Data (Moved to the End)
             st.subheader("📥 Download Cleaned Data")
