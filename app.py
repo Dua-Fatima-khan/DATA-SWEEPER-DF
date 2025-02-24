@@ -2,13 +2,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+import openpyxl 
 # Check for openpyxl dependency
-try:
-    import openpyxl
-except ImportError:
-    st.error("⚠️ **Missing Dependency**: The 'openpyxl' library is required to read Excel files. Please install it using `pip install openpyxl`.")
-    st.stop()  # Stop the app if the dependency is missing
+
+   
+
 
 # Set App Config
 st.set_page_config(page_title="SweepIt! 💡", layout="wide", page_icon="🧹")
